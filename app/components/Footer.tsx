@@ -1,4 +1,5 @@
-const links = ["Privacy", "Terms", "Contact", "X", "Instagram"];
+import { FaLinkedin, FaXTwitter, FaInstagram } from "react-icons/fa6";
+const links = ["Privacy", "Terms", "Contact"];
 
 export function Footer() {
   return (
@@ -28,10 +29,17 @@ export function Footer() {
           </nav>
         </div>
 
-        <p className="mt-8 text-xs text-ink-mute">
-          © {new Date().getFullYear()} Holo. Built with and for the Deaf
-          community.
-        </p>
+        <div className="flex flex-col gap-2">
+          <p className="mt-8 text-xs text-ink-mute">
+            © {new Date().getFullYear()} Holo Labs
+          </p>
+
+          <div className="flex flex-row items-center gap-2">
+            <FaLinkedin size={20} />
+            <FaXTwitter size={20} />
+            <FaInstagram size={20} />
+          </div>
+        </div>
       </div>
     </footer>
   );
