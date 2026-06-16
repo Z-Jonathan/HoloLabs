@@ -1,29 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="text" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#f4f6ff"/>
-      <stop offset="0.6" stop-color="#56e1ff"/>
-      <stop offset="1" stop-color="#8b6cff"/>
+      <stop offset="0" stop-color="#5a47c9"/>
+      <stop offset="1" stop-color="#17819f"/>
     </linearGradient>
-    <radialGradient id="b1" cx="0.2" cy="0.2" r="0.8">
-      <stop offset="0" stop-color="#7c5cff" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#7c5cff" stop-opacity="0"/>
+    <radialGradient id="b1" cx="0.18" cy="0.18" r="0.8">
+      <stop offset="0" stop-color="#6c5ce0" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#6c5ce0" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="b2" cx="0.85" cy="0.7" r="0.7">
-      <stop offset="0" stop-color="#3ec8ff" stop-opacity="0.5"/>
-      <stop offset="1" stop-color="#3ec8ff" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="b3" cx="0.6" cy="1" r="0.6">
-      <stop offset="0" stop-color="#2fe0b0" stop-opacity="0.4"/>
-      <stop offset="1" stop-color="#2fe0b0" stop-opacity="0"/>
+    <radialGradient id="b2" cx="0.88" cy="0.75" r="0.7">
+      <stop offset="0" stop-color="#1f93b8" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#1f93b8" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="1200" height="630" fill="#05060a"/>
+  <rect width="1200" height="630" fill="#f7f5ef"/>
   <rect width="1200" height="630" fill="url(#b1)"/>
   <rect width="1200" height="630" fill="url(#b2)"/>
-  <rect width="1200" height="630" fill="url(#b3)"/>
-  <text x="80" y="250" font-family="Inter, system-ui, sans-serif" font-size="44" font-weight="600" fill="#c4c9dc" letter-spacing="1">Holo</text>
-  <text x="76" y="360" font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="700" fill="url(#text)">Conversations</text>
-  <text x="76" y="460" font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="700" fill="url(#text)">without barriers.</text>
-  <text x="80" y="540" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="400" fill="#8b91a8">Real-time sign language translation</text>
+  <!-- Brand mark -->
+  <g fill="#1f1d1a" transform="translate(80,150)">
+    <rect x="0" y="0" width="9" height="58" rx="4.5"/>
+    <rect x="24" y="0" width="9" height="58" rx="4.5"/>
+    <circle cx="64" cy="41" r="12" fill="none" stroke="#1f1d1a" stroke-width="9"/>
+    <rect x="96" y="0" width="9" height="58" rx="4.5"/>
+    <circle cx="138" cy="41" r="12" fill="none" stroke="#1f1d1a" stroke-width="9"/>
+  </g>
+  <text x="80" y="360" font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="700" fill="#1f1d1a">Conversations</text>
+  <text x="80" y="460" font-family="Inter, system-ui, sans-serif" font-size="92" font-weight="700" fill="url(#text)">without barriers.</text>
+  <text x="84" y="540" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="400" fill="#8a887f">Real-time sign language translation</text>
 </svg>

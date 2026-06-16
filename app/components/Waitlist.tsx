@@ -120,7 +120,7 @@ export function Waitlist() {
                 <button
                   type="submit"
                   disabled={status === "loading" || isSuccess}
-                  className="group relative inline-flex shrink-0 items-center justify-center gap-2 rounded-glass px-6 py-3 text-sm font-medium text-white shadow-glass transition-[transform,filter] duration-300 [background:linear-gradient(120deg,theme(colors.violet.DEFAULT),theme(colors.cyan.DEFAULT))] hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-glow disabled:cursor-not-allowed disabled:opacity-70"
+                  className="group relative inline-flex shrink-0 items-center justify-center gap-2 rounded-glass bg-ink px-6 py-3 text-sm font-medium text-base shadow-glass transition-[transform,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:bg-ink-soft hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-glow disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {status === "loading" ? (
                     <>

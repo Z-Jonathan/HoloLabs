@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { VRM, VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
-import { AvatarAnimator, SignHandlers } from "./animator";
+import { AvatarAnimator, SignHandlers, SPELL_ARM } from "./animator";
+import { applyOutfit } from "./outfit";
 
 export interface AvatarScene {
   /** Queue a reply for the avatar to sign. */
@@ -55,12 +56,24 @@ export async function createAvatarScene(
   // VRM0 models face +Z; rotate so the avatar faces the camera.
   VRMUtils.rotateVRM0(vrm);
 
+  // Paint a fitted outfit onto the base body texture (the model ships nude).
+  applyOutfit(vrm);
+
   scene.add(vrm.scene);
 
   const animator = new AvatarAnimator(vrm);
   animator.decorativeMotion = !window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
+
+  // Pose-tuning hook: /studio?tune exposes the animator + the live pose
+  // table so hand/arm values can be adjusted from the console.
+  if (new URLSearchParams(window.location.search).has("tune")) {
+    (window as unknown as { __holoAvatar?: unknown }).__holoAvatar = {
+      animator,
+      spellArm: SPELL_ARM,
+    };
+  }
 
   // Resize handling.
   const resize = () => {

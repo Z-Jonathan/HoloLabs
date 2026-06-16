@@ -16,17 +16,17 @@ export function Hero() {
 
   const item = reduced
     ? {
-        hidden: { opacity: 0 },
-        show: { opacity: 1, transition: { duration: 0.3 } },
-      }
+      hidden: { opacity: 0 },
+      show: { opacity: 1, transition: { duration: 0.3 } },
+    }
     : {
-        hidden: { opacity: 0, y: 28 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-        },
-      };
+      hidden: { opacity: 0, y: 28 },
+      show: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
+      },
+    };
 
   return (
     <section
@@ -49,7 +49,7 @@ export function Hero() {
           variants={item}
           className="glass-surface mb-8 rounded-full px-4 py-1.5 text-sm text-ink-soft"
         >
-          Real-time sign language translation
+          Real Time Sign Language Translation
         </motion.p>
 
         <motion.h1
@@ -64,7 +64,7 @@ export function Hero() {
           className="mt-8 max-w-2xl text-pretty text-lg text-ink-soft sm:text-xl"
         >
           Holo translates sign language in real time. Sign into your camera, and
-          a lifelike 3D avatar signs right back — a natural, two-way
+          a lifelike 3D avatar signs right back a natural, two-way
           conversation in your own language.
         </motion.p>
 

@@ -23,35 +23,36 @@ export interface SignClip {
   frames: SignFrame[];
 }
 
-// Reusable arm positions (right arm).
+// Reusable arm positions (right arm). The rightHand x ≈ 1.4 twist keeps
+// the palm facing the viewer (tuned visually — see SPELL_ARM in animator).
 const AT_TEMPLE: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.75, -0.55, -0.85],
-  rightLowerArm: [0, -2.35, 0.5],
-  rightHand: [0, -0.25, 0],
+  rightLowerArm: [0, -2.35, 0.6],
+  rightHand: [1.4, -0.1, 0],
 };
 
 const AT_CHIN: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.6, -0.45, -0.95],
-  rightLowerArm: [0, -2.2, 0.45],
-  rightHand: [0, -0.3, 0],
+  rightLowerArm: [0, -2.2, 0.6],
+  rightHand: [1.4, -0.1, 0],
 };
 
 const AT_CHEST: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.35, -0.3, -1.1],
-  rightLowerArm: [0, -1.9, 0.35],
-  rightHand: [0, -0.35, 0],
+  rightLowerArm: [0, -1.9, 0.5],
+  rightHand: [1.2, -0.1, 0],
 };
 
 const EXTENDED: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.7, -0.8, -0.55],
-  rightLowerArm: [0, -0.9, 0.2],
-  rightHand: [0, -0.2, 0],
+  rightLowerArm: [0, -0.9, 0.3],
+  rightHand: [1.1, -0.1, 0],
 };
 
 const RAISED: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.4, -0.25, -1.05],
-  rightLowerArm: [0, -2.0, 0.4],
-  rightHand: [0, -0.4, 0],
+  rightLowerArm: [0, -2.0, 0.6],
+  rightHand: [1.4, -0.1, 0],
 };
 
 function wristTilt(

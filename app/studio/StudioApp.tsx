@@ -13,6 +13,7 @@ import { useFingerspelling } from "./lib/recognition/useFingerspelling";
 import { LandmarkOverlay } from "./components/LandmarkOverlay";
 import { RecognitionReadout } from "./components/RecognitionReadout";
 import { StatusBadge, BadgeTone } from "./components/StatusBadge";
+import { HoloLogo } from "../components/HoloLogo";
 
 const recognitionBadge: Record<
   RecognitionStatus,
@@ -123,7 +124,7 @@ export function StudioApp() {
             className="rounded-md text-lg font-semibold tracking-tight"
             aria-label="Back to the Holo home page"
           >
-            <span className="text-gradient">Holo</span>
+            <HoloLogo />
           </Link>
           <span className="rounded-full border border-glass-border bg-glass px-2.5 py-0.5 text-xs font-medium text-ink-soft">
             Studio

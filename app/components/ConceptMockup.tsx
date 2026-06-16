@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { GlassCard } from "./GlassCard";
 import { Reveal } from "./Reveal";
@@ -47,7 +48,7 @@ export function ConceptMockup() {
       <motion.div style={reduced ? undefined : { y, rotate }}>
         <GlassCard className="mx-auto max-w-5xl p-3 sm:p-4">
           <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2">
-            <WebcamPanel reduced={reduced} />
+            <WebcamPanel />
             <AvatarPanel reduced={reduced} />
           </div>
 
@@ -90,61 +91,21 @@ function PanelShell({
   );
 }
 
-/** Abstract animated silhouette standing in for a camera feed. */
-function WebcamPanel({ reduced }: { reduced: boolean }) {
+/** Real concept frame: a person signing into the camera with live ASL detection. */
+function WebcamPanel() {
   return (
     <PanelShell label="You">
-      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_30%,rgba(62,200,255,0.18),transparent_70%)]" />
-      <svg
-        viewBox="0 0 200 200"
-        className="absolute inset-0 h-full w-full"
-        role="img"
-        aria-label="Abstract silhouette of a person signing into a camera"
-      >
-        <defs>
-          <linearGradient id="figureGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#56e1ff" />
-            <stop offset="100%" stopColor="#7c5cff" />
-          </linearGradient>
-        </defs>
-        {/* Head + torso silhouette */}
-        <g fill="url(#figureGrad)" opacity="0.85">
-          <circle cx="100" cy="74" r="26" />
-          <path d="M58 200c0-30 19-54 42-54s42 24 42 54z" />
-        </g>
-        {/* Signing hands — gently animated to suggest motion */}
-        <motion.circle
-          cx="74"
-          cy="128"
-          r="10"
-          fill="#9ff0ff"
-          animate={reduced ? undefined : { cy: [128, 116, 128], cx: [74, 80, 74] }}
-          transition={
-            reduced
-              ? undefined
-              : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
-          }
-        />
-        <motion.circle
-          cx="126"
-          cy="120"
-          r="10"
-          fill="#c4b3ff"
-          animate={reduced ? undefined : { cy: [120, 132, 120], cx: [126, 120, 126] }}
-          transition={
-            reduced
-              ? undefined
-              : {
-                  duration: 2.4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.4,
-                }
-          }
-        />
-      </svg>
-      {/* Scanline shimmer */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(86,225,255,0.06)_50%,transparent)] bg-[length:100%_8px]" />
+      <Image
+        src="/concept-webcam.png"
+        alt="A person signing the ASL letter A into the camera, with Holo's live hand-tracking and letter recognition overlaid"
+        fill
+        sizes="(min-width: 768px) 50vw, 100vw"
+        className="object-cover object-[35%_center]"
+        priority
+      />
+      {/* Subtle tint + scanline to match the glass aesthetic of the Holo panel. */}
+      <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_30%,rgba(62,200,255,0.12),transparent_70%)] mix-blend-screen" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(86,225,255,0.06)_50%,transparent)] bg-[length:100%_8px]" />
     </PanelShell>
   );
 }

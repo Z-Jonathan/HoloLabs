@@ -34,11 +34,13 @@ const LETTER_SECONDS = 0.85;
 const GAP_SECONDS = 0.45;
 const SMOOTH = 14; // exponential smoothing rate for bone rotations
 
-/** Arm pose while fingerspelling: right hand raised beside the shoulder. */
-const SPELL_ARM: Record<string, [number, number, number]> = {
+/** Arm pose while fingerspelling: right hand raised beside the shoulder.
+ *  Exported so the ?tune debug hook can adjust it live in the browser. */
+export const SPELL_ARM: Record<string, [number, number, number]> = {
   rightUpperArm: [-0.4, -0.25, -1.05],
-  rightLowerArm: [0, -2.0, 0.4],
-  rightHand: [0, -0.4, 0],
+  rightLowerArm: [0, -2.0, 0.6],
+  // x ≈ 1.4 turns the palm to face the viewer (tuned visually).
+  rightHand: [1.4, -0.1, 0],
 };
 
 /** Relaxed arms-at-sides idle pose. */
@@ -262,11 +264,11 @@ export class AvatarAnimator {
     this.applyHandshape(shape);
 
     // Wrist orientation variants (G/H sideways, P/Q down).
-    const handBase = SPELL_ARM["rightHand"] ?? [0, -0.4, 0];
+    const handBase = SPELL_ARM["rightHand"] ?? [1.4, -0.1, 0];
     if (shape.wrist === "side") {
-      this.setTarget("rightHand", handBase[0] + 0.0, handBase[1], handBase[2] - 1.2);
+      this.setTarget("rightHand", handBase[0], handBase[1], handBase[2] - 1.2);
     } else if (shape.wrist === "down") {
-      this.setTarget("rightHand", handBase[0] + 1.4, handBase[1], handBase[2]);
+      this.setTarget("rightHand", handBase[0] + 1.2, handBase[1], handBase[2]);
     }
   }
 

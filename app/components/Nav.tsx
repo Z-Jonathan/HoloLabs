@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { CTAButton } from "./CTAButton";
+import { HoloLogo } from "./HoloLogo";
 
 const links = [
   { href: "#concept", label: "Concept" },
@@ -11,13 +12,35 @@ const links = [
 
 /**
  * Sticky translucent nav. Its blur, background opacity, and border
- * intensify once the user scrolls away from the top.
+ * intensify once the user scrolls away from the top. The HoloLabs logo
+ * collapses to its two bars while scrolling down and expands again on
+ * any upward scroll (or near the top).
  */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+
+      // Near the top the full wordmark always shows.
+      if (y < 96) {
+        setCollapsed(false);
+        lastY = y;
+        return;
+      }
+
+      // Small jitters (momentum scrolling) shouldn't flip the state.
+      const delta = y - lastY;
+      if (Math.abs(delta) < 6) return;
+      setCollapsed(delta > 0);
+      lastY = y;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -34,11 +57,8 @@ export function Nav() {
             : "border border-transparent bg-transparent backdrop-blur-0",
         ].join(" ")}
       >
-        <a
-          href="#top"
-          className="rounded-md text-lg font-semibold tracking-tight text-ink"
-        >
-          <span className="text-gradient">Holo</span>
+        <a href="#top" className="rounded-md" aria-label="HoloLabs — home">
+          <HoloLogo collapsed={collapsed} />
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">

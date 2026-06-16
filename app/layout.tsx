@@ -3,11 +3,33 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "./components/SmoothScroll";
 import { GradientBackground } from "./components/GradientBackground";
+import localFont from "next/font/local";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+});
+
+const satoshi = localFont({
+  src: [
+    {
+      path: '../public/fonts/Satoshi-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Satoshi-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Satoshi-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-satoshi', // This is what Tailwind will read
 });
 
 const siteUrl = "https://holo.example";
@@ -59,15 +81,15 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060a",
-  colorScheme: "dark",
+  themeColor: "#f7f5ef",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${satoshi.variable}`}>
       <body>
         <a
           href="#waitlist"

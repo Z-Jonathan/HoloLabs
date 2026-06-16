@@ -1,9 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Holo design tokens — "Liquid Glass".
- * Deep near-black canvas with luminous violet / cyan / teal accents,
- * frosted glass surfaces, large radii, layered soft shadows.
+ * Holo design tokens — "Soft Light".
+ * Warm ivory canvas with crisp white surfaces and restrained
+ * violet / blue / teal accents, hairline borders, soft diffuse shadows.
+ * Inspired by the calm, minimal palettes of Anthropic & ElevenLabs.
  */
 const config: Config = {
   content: [
@@ -13,40 +14,41 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Canvas
+        // Canvas + raised surfaces
         base: {
-          DEFAULT: "#05060a",
-          900: "#05060a",
-          800: "#0a0c14",
-          700: "#11141f",
+          DEFAULT: "#f7f5ef", // warm ivory canvas
+          900: "#ffffff", // crisp white panels / insets
+          800: "#ffffff", // raised surfaces (nav, etc.)
+          700: "#edebe3", // subtle neutral fill
         },
-        // Luminous accents
+        // Restrained accents — tuned for legibility on a light canvas
         violet: {
-          glow: "#8b6cff",
-          DEFAULT: "#7c5cff",
+          glow: "#6c5ce0",
+          DEFAULT: "#5a47c9",
         },
         cyan: {
-          glow: "#56e1ff",
-          DEFAULT: "#3ec8ff",
+          glow: "#1f93b8",
+          DEFAULT: "#17819f",
         },
         teal: {
-          glow: "#4ff0c4",
-          DEFAULT: "#2fe0b0",
+          glow: "#13a07a",
+          DEFAULT: "#0f8868",
         },
-        // Glass tints
+        // Glass tints — light surfaces with a dark hairline border
         glass: {
-          DEFAULT: "rgba(255,255,255,0.06)",
-          strong: "rgba(255,255,255,0.10)",
-          border: "rgba(255,255,255,0.14)",
+          DEFAULT: "rgba(255,255,255,0.62)",
+          strong: "rgba(255,255,255,0.88)",
+          border: "rgba(31,29,26,0.10)",
         },
         ink: {
-          DEFAULT: "#f4f6ff",
-          soft: "#c4c9dc",
-          mute: "#8b91a8",
+          DEFAULT: "#1f1d1a",
+          soft: "#54524b",
+          mute: "#8a887f",
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        satoshi: ['var(--font-satoshi)', 'sans-serif'],
       },
       borderRadius: {
         glass: "1.25rem",
@@ -60,10 +62,10 @@ const config: Config = {
       },
       boxShadow: {
         glass:
-          "0 1px 0 0 rgba(255,255,255,0.08) inset, 0 8px 40px -12px rgba(0,0,0,0.7), 0 2px 8px -2px rgba(0,0,0,0.5)",
+          "0 1px 2px 0 rgba(31,29,26,0.04), 0 8px 24px -12px rgba(31,29,26,0.12)",
         "glass-lg":
-          "0 1px 0 0 rgba(255,255,255,0.10) inset, 0 24px 70px -20px rgba(0,0,0,0.8), 0 8px 24px -8px rgba(0,0,0,0.6)",
-        glow: "0 0 80px -10px rgba(124,92,255,0.45)",
+          "0 2px 6px -1px rgba(31,29,26,0.05), 0 24px 56px -24px rgba(31,29,26,0.16)",
+        glow: "0 12px 32px -10px rgba(31,29,26,0.22)",
       },
       maxWidth: {
         content: "72rem",

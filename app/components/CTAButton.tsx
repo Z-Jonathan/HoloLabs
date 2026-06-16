@@ -14,7 +14,7 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "text-white shadow-glass [background:linear-gradient(120deg,theme(colors.violet.DEFAULT),theme(colors.cyan.DEFAULT))] hover:brightness-110 hover:shadow-glow",
+    "bg-ink text-base shadow-glass hover:bg-ink-soft hover:shadow-glow",
   secondary:
     "glass-surface glass-specular text-ink hover:bg-glass-strong",
 };
