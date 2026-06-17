@@ -129,11 +129,7 @@ export function applyOutfit(vrm: VRM): void {
   const ctx = canvas.getContext("2d")!;
   ctx.drawImage(src as CanvasImageSource, 0, 0, S, S);
   ctx.imageSmoothingEnabled = false;
-
-  // Accumulator for the chest emblem anchor (front upper-chest texels).
-  let cu = 0,
-    cv = 0,
-    cw = 0;
+  ctx.lineJoin = "round";
 
   const drawTri = (a: number, b: number, c: number) => {
     // Garment = highest-priority garment any of the three vertices belong to.
@@ -157,21 +153,16 @@ export function applyOutfit(vrm: VRM): void {
     const fabric = FABRIC[g];
     // Top-lit gradient + a touch more light on the front-facing panels.
     const f = (g === "top" ? 0.66 + 0.5 * h : 0.62 + 0.45 * h) * (front ? 1.05 : 0.9);
-    ctx.fillStyle = shade(fabric, f);
+    const color = shade(fabric, f);
+    ctx.fillStyle = color;
+    ctx.strokeStyle = color; // stroke the edge too, closing sub-pixel seams
     ctx.beginPath();
     ctx.moveTo(ax, ay);
     ctx.lineTo(bx, by);
     ctx.lineTo(cx, cy);
     ctx.closePath();
     ctx.fill();
-
-    // Collect a chest anchor from front-facing upper-chest texels.
-    if (g === "top" && front && h > 0.74 && h < 0.9) {
-      const w = h;
-      cu += ((ax + bx + cx) / 3) * w;
-      cv += ((ay + by + cy) / 3) * w;
-      cw += w;
-    }
+    ctx.stroke();
   };
 
   if (index) {
@@ -179,44 +170,6 @@ export function applyOutfit(vrm: VRM): void {
       drawTri(index.getX(i), index.getX(i + 1), index.getX(i + 2));
   } else {
     for (let i = 0; i < vCount; i += 3) drawTri(i, i + 1, i + 2);
-  }
-
-  // Brand details on the chest: a glowing zip placket + the two-bar mark.
-  if (cw > 0) {
-    const px = cu / cw;
-    const py = cv / cw;
-    const u = S / 1024; // unit scale relative to a 1024 reference
-
-    ctx.save();
-    ctx.translate(px, py);
-
-    // Zip placket — a soft violet→cyan vertical strip down the center.
-    const grad = ctx.createLinearGradient(0, -150 * u, 0, 150 * u);
-    grad.addColorStop(0, "rgba(139,108,255,0.0)");
-    grad.addColorStop(0.5, "rgba(124,92,255,0.55)");
-    grad.addColorStop(1, "rgba(86,225,255,0.0)");
-    ctx.fillStyle = grad;
-    ctx.fillRect(-7 * u, -150 * u, 14 * u, 300 * u);
-
-    // Two slanted bars (the HoloLabs mark) with a cyan glow.
-    ctx.shadowColor = "rgba(86,225,255,0.9)";
-    ctx.shadowBlur = 16 * u;
-    ctx.fillStyle = "#7ce9ff";
-    const bw = 13 * u,
-      bh = 46 * u,
-      gap = 9 * u,
-      skew = 5 * u,
-      oy = -10 * u;
-    for (const sx of [-(bw + gap) / 2, (bw + gap) / 2]) {
-      ctx.beginPath();
-      ctx.moveTo(sx - bw / 2 + skew, oy - bh / 2);
-      ctx.lineTo(sx + bw / 2 + skew, oy - bh / 2);
-      ctx.lineTo(sx + bw / 2 - skew, oy + bh / 2);
-      ctx.lineTo(sx - bw / 2 - skew, oy + bh / 2);
-      ctx.closePath();
-      ctx.fill();
-    }
-    ctx.restore();
   }
 
   // Swap the painted canvas into the existing texture(s). Mutating in place

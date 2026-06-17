@@ -18,27 +18,27 @@ const links = [
  */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    let lastY = window.scrollY;
+    // let lastY = window.scrollY;
 
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 24);
 
-      // Near the top the full wordmark always shows.
-      if (y < 96) {
-        setCollapsed(false);
-        lastY = y;
-        return;
-      }
+      // // Near the top the full wordmark always shows.
+      // if (y < 96) {
+      //   setCollapsed(false);
+      //   lastY = y;
+      //   return;
+      // }
 
-      // Small jitters (momentum scrolling) shouldn't flip the state.
-      const delta = y - lastY;
-      if (Math.abs(delta) < 6) return;
-      setCollapsed(delta > 0);
-      lastY = y;
+      // // Small jitters (momentum scrolling) shouldn't flip the state.
+      // const delta = y - lastY;
+      // if (Math.abs(delta) < 6) return;
+      // setCollapsed(delta > 0);
+      // lastY = y;
     };
 
     onScroll();
@@ -58,7 +58,7 @@ export function Nav() {
         ].join(" ")}
       >
         <a href="#top" className="rounded-md" aria-label="HoloLabs — home">
-          <HoloLogo collapsed={collapsed} />
+          <HoloLogo />
         </a>
 
         <ul className="hidden items-center gap-1 md:flex">

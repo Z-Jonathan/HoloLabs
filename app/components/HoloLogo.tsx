@@ -8,10 +8,8 @@
  * simply renders the full mark.
  */
 export function HoloLogo({
-  collapsed: _collapsed = false,
   className = "",
 }: {
-  collapsed?: boolean;
   className?: string;
 }) {
   return (
